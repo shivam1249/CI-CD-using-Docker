@@ -34,7 +34,7 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-                                                              {
+                     {
           sh  'docker push 1204199507/jenkins_play12:latest'
         //  sh  'docker push 1204199507/jenkins_play12:$BUILD_NUMBER' 
         }
