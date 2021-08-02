@@ -9,7 +9,7 @@ pipeline {
       stage('checkout') {
            steps {
              
-                git branch: 'master', url: 'https://github.com/devops4solutions/CI-CD-using-Docker.git'
+                git branch: 'master', url: 'https://github.com/shivam1249/CI-CD-using-Docker.git'
              
           }
         }
@@ -24,9 +24,9 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t samplewebapp:latest .' 
-                sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:latest'
-                //sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:$BUILD_NUMBER'
+                sh 'docker build -t jenkins_play12:latest .' 
+                sh 'docker tag jenkins_play12 1204199507/jenkins_play12:latest'
+                //sh 'docker tag jenkins_play12 1204199507/jenkins_play12:$BUILD_NUMBER'
                
           }
         }
@@ -34,9 +34,9 @@ pipeline {
   stage('Publish image to Docker Hub') {
           
             steps {
-        withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push nikhilnidhi/samplewebapp:latest'
-        //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
+                                                              {
+          sh  'docker push 1204199507/jenkins_play12:latest'
+        //  sh  'docker push 1204199507/jenkins_play12:$BUILD_NUMBER' 
         }
                   
           }
@@ -46,17 +46,9 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8003:8080 nikhilnidhi/samplewebapp"
+                sh "docker run -d -p 8181:80 1204199507/jenkins_play12"
  
             }
         }
- stage('Run Docker container on remote hosts') {
-             
-            steps {
-                sh "docker -H ssh://jenkins@172.31.28.25 run -d -p 8003:8080 nikhilnidhi/samplewebapp"
  
-            }
-        }
-    }
-	}
     
