@@ -34,7 +34,7 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8080:80 1204199507/jenkins_play12"
+                sh "docker run -d -p 8080:8080 1204199507/jenkins_play12"
  
             }
         }
